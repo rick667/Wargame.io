@@ -41,6 +41,8 @@ MonoBehaviour:
   - RespawnSpaceship
   - InitiateGame
   - UpdateList
+  - AddPlayer
+  - Inicialize
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Realtime;
+
 
 public class MenuLobby : MonoBehaviourPunCallbacks
 {
