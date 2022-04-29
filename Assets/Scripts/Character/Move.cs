@@ -30,6 +30,14 @@ public class Move : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(photonView.IsMine)
+        {
+            Movement();
+        }
+    }
+
+    public void Movement()
+    {
         if(Input.GetKey("right"))
         {
             transform.position += new Vector3(spd, 0, 0);
@@ -47,6 +55,5 @@ public class Move : MonoBehaviourPunCallbacks
         {
             transform.position -= new Vector3(0, 0, spd);
         }
-
     }
 }

@@ -26,7 +26,7 @@ public class Rede : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("Connection suceful");
+        PhotonNetwork.JoinLobby();
     }
 
     public void CriarSala(string nomeSala)
@@ -54,9 +54,9 @@ public class Rede : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
-    [PunRPC]
     public void InitiateGame(string sceneName)
     {
+
         PhotonNetwork.LoadLevel(sceneName);
     }
 }

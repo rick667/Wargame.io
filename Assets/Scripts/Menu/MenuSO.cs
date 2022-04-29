@@ -48,7 +48,7 @@ public class MenuSO : MonoBehaviourPunCallbacks
     }
     public void InitiateGame(string sceneName)
     {
-        Rede.Instancia.photonView.RPC("InitiateGame", RpcTarget.All, sceneName);
+        Rede.Instancia.InitiateGame(sceneName);
     }
 
 }

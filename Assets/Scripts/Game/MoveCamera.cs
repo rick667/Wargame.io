@@ -11,15 +11,33 @@ public class MoveCamera : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(photonView.IsMine)
+        if (_player == null)
         {
-            transform.position = new Vector3(_player.transform.position.x, 10, _player.transform.position.z);
+            try
+            {
+                _player = GameObject.FindWithTag("Player"); 
+                transform.Rotate(new Vector3(70,0,0));
+                if(_player != null)
+                {
+                    gameObject.transform.SetParent(_player.transform);
+                }
+
+            }
+            catch
+            {
+                _player = null;
+            } 
         }
+
+        if(photonView.IsMine && _player != null)
+        {
+            transform.position = new Vector3(_player.transform.position.x, _player.transform.position.y +10, _player.transform.position.z -3.5f);
+        }
+
     }
 }

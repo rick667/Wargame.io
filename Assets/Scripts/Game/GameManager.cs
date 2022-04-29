@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField] private Transform[] _spawns;  
 
     private int _playersInGame = 0;
+    private bool _exist = false;
     private List<Move> _players;
     public List<Move> Players { get => _players; private set => _players = value; }
 
@@ -29,26 +30,24 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        photonView.RPC("AddPlayer", RpcTarget.AllBuffered);
-        _players = new List<Move>();
-    }
-
-    [PunRPC]
-    private void AddPlayer()
-    {
-        _playersInGame++;
-        if(_playersInGame == PhotonNetwork.PlayerList.Length)
+        if(photonView.IsMine)
         {
-            CreatePlayer();
+
+            //AddPlayer();
+            _players = new List<Move>();
         }
+
     }
 
-    private void CreatePlayer()
+    private void Update()
     {
-        var playerObj = PhotonNetwork.Instantiate(_localPrefab, _spawns[Random.Range(0, _spawns.Length)].position, Quaternion.identity);
-        var player = playerObj.GetComponent<Move>();
+        if(_exist == false)
+        {
+            _exist = true;
+            PhotonNetwork.Instantiate("Player", _spawns[Random.Range(0, _spawns.Length)].position, Quaternion.identity);
+            PhotonNetwork.Instantiate("Camera", _spawns[Random.Range(0, _spawns.Length)].position, Quaternion.identity);
 
-        PhotonNetwork.Instantiate("Player", _spawns[Random.Range(0, _spawns.Length)].position, Quaternion.identity);
+        }
     }
 
 }
